@@ -11,6 +11,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
     <!-- Blazor Web components -->
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+
+    <!-- Newtonsoft.Json (Json.NET) - Popular JSON serialization library -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Entity Framework Core - For database operations -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

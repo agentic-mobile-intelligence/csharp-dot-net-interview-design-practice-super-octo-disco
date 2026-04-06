@@ -1,3 +1,5 @@
+using HelloWorldMvcApp.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // ============ DEPENDENCY INJECTION CONFIGURATION ============
@@ -10,7 +12,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Add configuration
+// ============ ADD CUSTOM SERVICES ============
+
+// Register JSON service for Newtonsoft.Json usage
+builder.Services.AddScoped<IJsonService, JsonService>();
+
+// ============ ADD CONFIGURATION ============
 var configuration = builder.Configuration;
 
 // ============ BUILD APPLICATION ============
@@ -42,5 +49,8 @@ app.MapControllerRoute(
 // Blazor component routes
 app.MapRazorComponents<HelloWorldMvcApp.Components.App>()
     .AddInteractiveServerRenderMode();
+
+// API routes (automatically mapped from ApiController)
+app.MapControllers();
 
 app.Run();
