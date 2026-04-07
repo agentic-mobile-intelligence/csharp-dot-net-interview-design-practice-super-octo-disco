@@ -606,6 +606,76 @@ Don't refactor for no reason. "If it ain't broke, don't fix it" - but keep maint
 
 ---
 
+### Q16: Where do you put business logic — database, API, or domain layer?
+
+**Answer:**
+
+Business logic belongs in the **domain layer**. The API layer handles HTTP routing, input validation, and request/response mapping. The database layer handles persistence, column types, and constraints. The domain layer owns the actual business rules — calculations, validations, and data transformations.
+
+**Why the domain layer:**
+- **Testable** without HTTP context or database connections
+- **Portable** across data sources (CSV, Excel, PMS exports, APIs)
+- **Single source of truth** for business rules
+- **Decoupled** from infrastructure concerns
+
+**Example — Hospitality/PMS system:**
+
+```csharp
+// Domain layer — business logic lives here
+public class ReservationService
+{
+    private readonly IRoomRepository _roomRepository;
+
+    public ReservationService(IRoomRepository roomRepository)
+    {
+        _roomRepository = roomRepository;
+    }
+
+    public decimal CalculateStayCost(Room room, DateTime checkIn, DateTime checkOut)
+    {
+        int nights = (checkOut - checkIn).Days;
+        decimal cost = room.NightlyRate * nights;
+
+        // Business rule: 7+ night discount
+        if (nights >= 7) cost *= 0.90m;
+
+        // Business rule: premium room surcharge
+        if (room.Type == RoomType.Suite || room.Type == RoomType.Penthouse)
+            cost *= 1.12m;
+
+        return Math.Round(cost, 2);
+    }
+}
+
+// API layer — orchestration only, no business rules
+[HttpPost]
+public IActionResult Create([FromBody] CreateReservationRequest request)
+{
+    var reservation = _reservationService.CreateReservation(
+        request.RoomId, request.GuestName,
+        request.CheckIn, request.CheckOut);
+
+    return CreatedAtAction(nameof(GetById),
+        new { id = reservation.ReservationId }, reservation);
+}
+
+// Infrastructure layer — data access, implements domain interfaces
+public class CsvPmsDataSource : IPmsDataSource
+{
+    public IEnumerable<Room> ImportRooms()
+    {
+        // Parse CSV into the same domain models
+        return File.ReadAllLines(_filePath)
+            .Skip(1)
+            .Select(line => MapToRoom(line));
+    }
+}
+```
+
+**Key point:** The API contract types (request/response DTOs) will look similar to domain models, but they serve different purposes. Domain models carry business meaning; API contracts handle serialization. Data from any source — Excel, CSV, PMS files, database — all flows through the same domain logic. Shared types, shared structures, shared data models between layers keep everything consistent.
+
+---
+
 ## Practice Questions
 
 Try answering these without looking at answers:
