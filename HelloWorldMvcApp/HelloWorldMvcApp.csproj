@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- ASP.NET Core Web Framework -->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
+    <!-- Blazor Web components -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+
+    <!-- Newtonsoft.Json (Json.NET) - Popular JSON serialization library -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+    <!-- Entity Framework Core - For database operations -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+
+    <!-- ============ EXCEL INGESTION ============ -->
+    <!-- EPPlus - Best-in-class Excel read/write for .xlsx files -->
+    <PackageReference Include="EPPlus" Version="7.0.0" />
+    <!-- ClosedXML - Cleaner API for Excel manipulation -->
+    <PackageReference Include="ClosedXML" Version="0.102.1" />
+    <!-- ExcelDataReader - Lightweight, fast, read-only Excel ingestion -->
+    <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+
+    <!-- ============ ETL / DATA PROCESSING ============ -->
+    <!-- CsvHelper - CSV parsing (common in hospitality exports) -->
+    <PackageReference Include="CsvHelper" Version="30.0.0" />
+    <!-- AutoMapper - Clean mapping from Excel rows to domain models -->
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <!-- AutoMapper Dependency Injection -->
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <!-- Dapper - Lightweight SQL for high-performance queries -->
+    <PackageReference Include="Dapper" Version="2.0.123" />
+
+    <!-- ============ BULK OPERATIONS ============ -->
+    <!-- EFCore.BulkExtensions - Critical for bulk insert/update/delete without row-by-row overhead -->
+    <PackageReference Include="EFCore.BulkExtensions" Version="8.0.7" />
+
+    <!-- ============ DATA VALIDATION ============ -->
+    <!-- FluentValidation - Validate incoming PMS data (rooms, dates, nulls, formats) -->
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
+    <!-- FluentValidation Dependency Injection -->
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+
+    <!-- ============ RESILIENCE & RETRY ============ -->
+    <!-- Polly - Retry policies for unreliable data sources -->
+    <PackageReference Include="Polly" Version="8.2.0" />
+
+    <!-- ============ SCHEDULING ============ -->
+    <!-- Hangfire - Background job scheduling for recurring ETL runs -->
+    <PackageReference Include="Hangfire.Core" Version="1.7.34" />
+    <!-- Hangfire SQL Server Storage -->
+    <PackageReference Include="Hangfire.SqlServer" Version="1.7.34" />
+
+    <!-- ============ LOGGING & OBSERVABILITY ============ -->
+    <!-- Serilog - Structured logging for tracking exact row failures -->
+    <PackageReference Include="Serilog" Version="3.0.1" />
+    <!-- Serilog ASP.NET Core integration -->
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <!-- Serilog file sink for persistent logging -->
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <!-- Serilog Seq sink for log aggregation -->
+    <PackageReference Include="Serilog.Sinks.Seq" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>
