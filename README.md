@@ -5,6 +5,13 @@ This study guide covers essential design principles and patterns for C# .NET dev
 
 ## Contents
 
+### 0. [Access Modifiers](./00-Access-Modifiers.md)
+- **Public** - Full accessibility
+- **Private** - Restricted to the same class
+- **Protected** - Available to derived classes
+- **Internal** - Limited to the same assembly
+- **Protected Internal** & **Private Protected** - Advanced modifiers
+
 ### 1. [SOLID Principles](./01-SOLID-Principles.md)
 - **S**ingle Responsibility Principle
 - **O**pen/Closed Principle
